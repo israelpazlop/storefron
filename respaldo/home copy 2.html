@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tienda de Vestidos</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #ffffff;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .navbar {
+            background-color: #f8f9fa !important;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: #2c3e50 !important;
+        }
+
+        .nav-link {
+            color: #2c3e50 !important;
+            font-weight: 500;
+            margin-right: 1rem;
+        }
+
+        .nav-link:hover {
+            color: #e74c3c !important;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-radius: 16px;
+            transition: transform 0.2s ease;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+        }
+
+        .card img {
+            border-radius: 16px 16px 0 0;
+            height: 320px;
+            object-fit: cover;
+        }
+
+        .price {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #e74c3c;
+        }
+
+        #result {
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Spinner centrado */
+        #loadingSpinner {
+            display: none;
+            text-align: center;
+            padding: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">👗 Fashion Store</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Colección</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Ofertas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTENIDO -->
+    <div class="container py-5">
+        <h1 class="text-center mb-5">🛍️ Nuestra Colección</h1>
+        <div class="row g-4">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card h-100" data-dress="images/dress1.png">
+                    <img src="images/dress1.png" class="card-img-top" alt="Vestido 1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Casual Dress 1</h5>
+                        <p class="price">$39.99</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card h-100" data-dress="images/dress2.png">
+                    <img src="images/dress2.png" class="card-img-top" alt="Vestido 2">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Casual Dress 2</h5>
+                        <p class="price">$49.99</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card h-100" data-dress="images/dress3.jpg">
+                    <img src="images/dress3.jpg" class="card-img-top" alt="Vestido 3">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Casual Dress 3</h5>
+                        <p class="price">$44.99</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card h-100" data-dress="images/dress4.jpg">
+                    <img src="images/dress4.jpg" class="card-img-top" alt="Vestido 4">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Casual Dress 4</h5>
+                        <p class="price">$59.99</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card h-100" data-dress="images/dress5.png">
+                    <img src="images/dress5.png" class="card-img-top" alt="Vestido 5">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Casual Dress 5</h5>
+                        <p class="price">$42.99</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card h-100" data-dress="images/dress6.png">
+                    <img src="images/dress6.png" class="card-img-top" alt="Vestido 6">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Casual Dress 6</h5>
+                        <p class="price">$52.99</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL SUBIR MODELO -->
+    <div class="modal fade" id="uploadModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form id="uploadForm">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Subir Foto de la Modelo</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="file" name="model" id="modelInput" class="form-control" accept="image/*" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Generar Imagen</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL RESULTADO -->
+    <div class="modal fade" id="resultModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Resultado</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <!-- Spinner -->
+                    <div id="loadingSpinner">
+                        <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+                            <span class="visually-hidden">Generando imagen...</span>
+                        </div>
+                        <p class="mt-3">Generando imagen, por favor espera...</p>
+                    </div>
+                    <!-- Imagen -->
+                    <img id="result" alt="Resultado" style="display:none;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        let selectedDress = null;
+
+        const uploadModal = new bootstrap.Modal(document.getElementById("uploadModal"));
+        const resultModal = new bootstrap.Modal(document.getElementById("resultModal"));
+        const resultImg = document.getElementById("result");
+        const spinner = document.getElementById("loadingSpinner");
+
+        // Click en tarjeta
+        document.querySelectorAll(".card").forEach(card => {
+            card.addEventListener("click", () => {
+                selectedDress = card.dataset.dress;
+                uploadModal.show();
+            });
+        });
+
+        // Submit form
+        document.getElementById("uploadForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            if (!selectedDress) return;
+
+            const modelFile = document.getElementById("modelInput").files[0];
+            if (!modelFile) {
+                alert("Por favor, selecciona una imagen de la modelo.");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append("dress", await fetch(selectedDress).then(r => r.blob()), "dress.png");
+            formData.append("model", modelFile);
+
+            try {
+                uploadModal.hide();
+                resultImg.style.display = "none";
+                spinner.style.display = "block";
+                resultModal.show();
+
+                const res = await fetch("http://127.0.0.1:8000/combine", {
+                    method: "POST",
+                    body: formData
+                });
+
+                if (!res.ok) {
+                    const err = await res.json();
+                    alert("Error: " + err.error);
+                    return;
+                }
+
+                const blob = await res.blob();
+                resultImg.src = URL.createObjectURL(blob);
+
+                // Mostrar imagen y ocultar spinner
+                spinner.style.display = "none";
+                resultImg.style.display = "block";
+            } catch (error) {
+                spinner.style.display = "none";
+                alert("Error de conexión con el servidor: " + error.message);
+            }
+        });
+    </script>
+</body>
+
+</html>
