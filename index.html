@@ -20,6 +20,29 @@
             font-family: 'Poppins', sans-serif;
         }
 
+        .hero-section {
+            /* Imagen de fondo de Unsplash - ¡puedes cambiarla! */
+            background: url('https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=2070&auto=format&fit=crop') no-repeat center center;
+            background-size: cover;
+            height: 60vh;
+            position: relative;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .hero-section .container {
+            position: relative;
+            z-index: 2;
+        }
+
         .navbar {
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
@@ -90,6 +113,432 @@
             padding: 30px;
         }
     </style>
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Chuvistore</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Colección</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Ofertas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="hero-section text-center text-white d-flex">
+        <div class="container my-auto">
+            <h1 class="display-4">Elegancia en Cada Hilo</h1>
+            <p class="lead">Descubre la colección que define tu estilo.</p>
+            <a href="#product-grid-container" class="btn btn-primary btn-lg">Ver Colección</a>
+        </div>
+    </header>
+
+    <!-- CONTENIDO -->
+    <div class="container py-5" id="product-grid-container">
+        <h1 class="text-center mb-5">Nuestra Colección</h1>
+        <!-- El grid de productos se generará aquí con JavaScript -->
+        <div id="product-grid" class="row g-4"></div>
+    </div>
+
+    <!-- MODAL SUBIR MODELO -->
+    <div class="modal fade" id="uploadModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form id="uploadForm">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Subir tu foto</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="file" name="model" id="modelInput" class="form-control" accept="image/*" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Generar Imagen</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL RESULTADO -->
+    <div class="modal fade" id="resultModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="resultModalTitle">Resultado</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div id="loadingSpinner" class="py-5">
+                        <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+                            <span class="visually-hidden">Generando imagen...</span>
+                        </div>
+                        <p class="mt-3">Generando imagen, por favor espera...</p>
+                    </div>
+                    <img id="result" class="img-fluid" alt="Resultado" style="display:none;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-white pt-5 pb-4">
+        <div class="container text-center text-md-start">
+            <div class="row text-center text-md-start">
+
+                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 fw-bold text-primary">Chuvistore</h5>
+                    <p>
+                        Tienda de moda online dedicada a ofrecer vestidos únicos y de alta calidad para cada ocasión.
+                    </p>
+                </div>
+
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 fw-bold">Productos</h5>
+                    <p><a href="#" class="text-white" style="text-decoration: none;">Vestidos de Gala</a></p>
+                    <p><a href="#" class="text-white" style="text-decoration: none;">Vestidos Casuales</a></p>
+                    <p><a href="#" class="text-white" style="text-decoration: none;">Accesorios</a></p>
+                </div>
+
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 fw-bold">Enlaces Útiles</h5>
+                    <p><a href="#" class="text-white" style="text-decoration: none;">Tu Cuenta</a></p>
+                    <p><a href="#" class="text-white" style="text-decoration: none;">Preguntas Frecuentes</a></p>
+                    <p><a href="#" class="text-white" style="text-decoration: none;">Políticas de Envío</a></p>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 fw-bold">Contacto</h5>
+                    <p><i class="fas fa-home me-3"></i>Tu Ciudad, PA 12345, MX</p>
+                    <p><i class="fas fa-envelope me-3"></i>contacto@chuvistore.com</p>
+                    <p><i class="fas fa-phone me-3"></i>+ 52 246 463 1466</p>
+                </div>
+            </div>
+
+            <hr class="mb-4">
+
+            <div class="row align-items-center">
+                <div class="col-md-7 col-lg-8">
+                    <p> © 2024 Copyright:
+                        <a href="#" class="text-white" style="text-decoration: none;">
+                            <strong class="text-primary">Chuvistore</strong>
+                        </a>
+                    </p>
+                </div>
+                <div class="col-md-5 col-lg-4">
+                    <div class="text-center text-md-end">
+                        <ul class="list-unstyled list-inline">
+                            <li class="list-inline-item">
+                                <a href="#" class="btn-floating btn-sm text-white" style="font-size: 23px;"><i
+                                        class="fab fa-facebook"></i></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#" class="btn-floating btn-sm text-white" style="font-size: 23px;"><i
+                                        class="fab fa-instagram"></i></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#" class="btn-floating btn-sm text-white" style="font-size: 23px;"><i
+                                        class="fab fa-whatsapp"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // --- CONFIGURACIÓN ---
+        const WHATSAPP_NUMBER = "2464631466";
+        const API_KEY = "AIzaSyC-I2tqWPCJ11ZMbIVRkz3jUntLpXlWjaA"; // ⚠️ Tu API Key
+        let selectedDress = null;
+
+        // --- FRASES MOTIVACIONALES ---
+        const motivationalPhrases = [
+            "¡Luces genial!",
+            "¡Se ve perfecto en ti!",
+            "¡Es totalmente tu estilo!",
+            "¡Una elección increíble!",
+            "¡Hecho para ti!",
+            "¡Simplemente espectacular!",
+            "¡Lista para deslumbrar!",
+            "¡Te queda increíble!",
+            "¡La combinación perfecta!",
+            "¡Justo lo que buscabas!"
+        ];
+
+        // --- DATOS DE PRODUCTOS (simulando un archivo JSON) ---
+        const products = [
+            { id: 1, name: "Vestido Floral de Verano", price: "39.99", image: "images/dress1.jpg" },
+            { id: 2, name: "Vestido Azul de Lunares", price: "49.99", image: "images/dress2.jpg" },
+            { id: 3, name: "Elegancia Rosa Pastel", price: "44.99", image: "images/dress3.jpg" },
+            { id: 4, name: "Vestido Azul Clásico", price: "59.99", image: "images/dress4.jpg" },
+            { id: 5, name: "Vestido Rojo de Puntos", price: "42.99", image: "images/dress5.png" },
+            { id: 6, name: "Vestido Floral Amapola", price: "52.99", image: "images/dress6.png" }
+        ];
+
+        const uploadModal = new bootstrap.Modal(document.getElementById("uploadModal"));
+        const resultModal = new bootstrap.Modal(document.getElementById("resultModal"));
+        const resultImg = document.getElementById("result");
+        const spinner = document.getElementById("loadingSpinner");
+        const productGrid = document.getElementById("product-grid");
+
+        // --- FUNCIONES AUXILIARES ---
+        async function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result.split(",")[1]);
+                reader.onerror = error => reject(error);
+                reader.readAsDataURL(file);
+            });
+        }
+
+        async function urlToBase64(url) {
+            const response = await fetch(url);
+            const blob = await response.blob();
+            return await fileToBase64(blob);
+        }
+
+        function getMimeTypeFromUrl(url) {
+            const ext = url.split(".").pop().toLowerCase();
+            switch (ext) {
+                case "jpg":
+                case "jpeg":
+                    return "image/jpeg";
+                case "png":
+                    return "image/png";
+                case "webp":
+                    return "image/webp";
+                default:
+                    return "image/png"; // fallback
+            }
+        }
+
+        // --- RENDERIZADO DE PRODUCTOS ---
+        function renderProducts() {
+            productGrid.innerHTML = ''; // Limpiar el grid antes de renderizar
+            products.forEach(product => {
+                const cardHtml = `
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="card" data-dress="${product.image}">
+                            <img src="${product.image}" class="card-img-top" alt="${product.name}" loading="lazy">
+                            <div class="card-body">
+                                <h5 class="card-title">${product.name}</h5>
+                                <p class="price mt-auto">$${product.price}</p>
+                            </div>
+                            <div class="card-footer d-flex justify-content-between align-items-center">
+                                <button class="btn btn-outline-primary btn-sm btn-try-on" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" title="Sube tu foto y mira cómo te queda el vestido.">
+                                    <i class="fas fa-camera me-1"></i>Probador Virtual
+                                </button>
+                                <a href="#" class="btn btn-success btn-sm btn-buy"><i
+                                        class="fab fa-whatsapp me-1"></i>Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                productGrid.innerHTML += cardHtml;
+            });
+        }
+
+        // --- MANEJO DE EVENTOS ---
+        // Usamos delegación de eventos para que los botones funcionen en elementos creados dinámicamente
+        productGrid.addEventListener('click', (e) => {
+            const target = e.target;
+            const card = target.closest('.card');
+
+            if (target.classList.contains('btn-try-on')) {
+                selectedDress = card.dataset.dress;
+                uploadModal.show();
+            }
+
+            if (target.classList.contains('btn-buy')) {
+                e.preventDefault();
+                const title = card.querySelector('.card-title').textContent;
+                const price = card.querySelector('.price').textContent;
+                const imageUrl = new URL(card.querySelector('img').src, window.location.href).href;
+
+                const message = encodeURIComponent(`¡Hola! Estoy interesado/a en el vestido "${title}" (${price}).\n\nAquí está el enlace a la imagen: ${imageUrl}`);
+                const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+
+                window.open(whatsappUrl, '_blank');
+            }
+        });
+
+        // Submit del formulario del probador virtual
+        document.getElementById("uploadForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            if (!selectedDress) return;
+
+            const modelFile = document.getElementById("modelInput").files[0];
+            if (!modelFile) {
+                alert("Por favor, selecciona una imagen de la modelo.");
+                return;
+            }
+
+            try {
+                uploadModal.hide();
+                resultImg.style.display = "none";
+                spinner.style.display = "block";
+
+                // Seleccionar y mostrar frase aleatoria en el título del modal
+                const resultModalTitle = document.getElementById("resultModalTitle");
+                const randomPhrase = motivationalPhrases[Math.floor(Math.random() * motivationalPhrases.length)];
+                resultModalTitle.textContent = randomPhrase;
+
+                resultModal.show();
+
+                const dressBase64 = await urlToBase64(selectedDress);
+                const modelBase64 = await fileToBase64(modelFile);
+                const dressMimeType = getMimeTypeFromUrl(selectedDress);
+
+                const body = {
+                    contents: [{
+                        parts: [
+                            { inlineData: { mimeType: modelFile.type, data: modelBase64 } },
+                            { inlineData: { mimeType: dressMimeType, data: dressBase64 } },
+                            {
+                                text: `Create a professional e-commerce fashion photo on a plain white background.
+ The woman from the first image must wear the dress from the second image.
+ Generate a realistic full-body fashion photo with natural shadows and lighting.
+ Preserve the exact face, identity, and hairstyle of the woman.
+ Do not redraw, replace, or alter the face in any way.
+ Only change the clothing and adjust body proportions to fit the dress.`
+                            }
+                        ]
+                    }]
+                };
+
+                const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image-preview:generateContent", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "x-goog-api-key": API_KEY
+                    },
+                    body: JSON.stringify(body)
+                });
+
+                const data = await res.json();
+                const imgPart = data.candidates?.[0]?.content?.parts?.find(p => p.inlineData);
+                const imgBase64 = imgPart?.inlineData?.data;
+
+                if (!imgBase64) throw new Error("No se generó ninguna imagen. La respuesta de la API podría haber cambiado o contener un error.");
+
+                resultImg.src = "data:image/png;base64," + imgBase64;
+                spinner.style.display = "none";
+                resultImg.style.display = "block";
+            } catch (error) {
+                spinner.style.display = "none";
+                alert("Error: " + error.message);
+                console.error(error);
+                resultModal.hide();
+            }
+        });
+
+        // --- INICIALIZACIÓN ---
+        // Renderizar los productos cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            // Habilitar los tooltips de Bootstrap en toda la página una vez que los productos están renderizados
+            const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+            [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+        });
+    </script>
+
+
+</body>
+
+</html>
+background-color: #f8f9fa;
+font-family: 'Poppins', sans-serif;
+}
+
+.navbar {
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.navbar-brand {
+font-weight: bold;
+font-size: 1.5rem;
+color: #2c3e50 !important;
+}
+
+.nav-link {
+color: #2c3e50 !important;
+font-weight: 500;
+margin-right: 1rem;
+}
+
+.nav-link:hover {
+color: #e74c3c !important;
+}
+
+.card {
+border: none;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+border-radius: 16px;
+transition: transform 0.2s ease;
+display: flex;
+flex-direction: column;
+}
+
+.card:hover {
+transform: translateY(-6px);
+}
+
+.card img {
+border-radius: 16px 16px 0 0;
+height: 320px;
+object-fit: contain;
+}
+
+.card-body {
+flex-grow: 1;
+display: flex;
+flex-direction: column;
+padding: 1.25rem;
+}
+
+.card-footer {
+background-color: #ffffff;
+border-top: none;
+border-radius: 0 0 16px 16px;
+}
+
+.price {
+font-size: 1.1rem;
+font-weight: 600;
+color: #e74c3c;
+}
+
+#result {
+max-width: 100%;
+border-radius: 12px;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+#loadingSpinner {
+display: none;
+text-align: center;
+padding: 30px;
+}
+</style>
 </head>
 
 <body>
@@ -215,7 +664,7 @@
             <div class="modal-content">
                 <form id="uploadForm">
                     <div class="modal-header">
-                        <h5 class="modal-title">Subir Foto de la Modelo</h5>
+                        <h5 class="modal-title">Sube tu foto</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
